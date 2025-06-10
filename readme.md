@@ -18,7 +18,8 @@ export default function App() {
 }
 ```
 
-> [!NOTE] > _Here the **flex: 1** is appplied to occupy the whole screen height and width_
+> [!NOTE] 
+> _Here the **flex: 1** is appplied to occupy the whole screen height and width_
 
 ## Text
 
@@ -48,7 +49,8 @@ export default function App() {
 }
 ```
 
-> [!NOTE] >_Any text always be wrapped with 'Text' component otherwise it will throw the error_
+> [!NOTE] 
+> Any text must be wrapped with 'Text' component otherwise it will throw the error_
 
 ## Image
 
