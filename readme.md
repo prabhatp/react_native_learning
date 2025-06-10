@@ -47,3 +47,14 @@ export default function App() {
 ```
 >[!NOTE]
 >*Any text always be wrapped with 'Text' component otherwise it will throw the error*
+
+## Image
+**The Image component enables us to display various types of images, including**
+- Static images
+- Network images
+- Images from the local disk, such as the camera roll
+
+**React Native seamlessly translates the Image component to platform-specific counterparts**
+- UIImageView for iOS
+- ImageView for Android
+- 'img' for the Web
