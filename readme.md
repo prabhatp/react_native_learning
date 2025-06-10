@@ -50,7 +50,7 @@ export default function App() {
 ```
 
 > [!NOTE] 
-> Any text must be wrapped with 'Text' component otherwise it will throw the error_
+> Any text must be wrapped with 'Text' component otherwise it will throw the error
 
 ## Image
 
