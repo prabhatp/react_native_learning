@@ -16,7 +16,8 @@ export default function App() {
   </View>;
 }
 ```
-##### *Here the **flex: 1** is appplied to occupy the whole screen height and width*
+>[!NOTE]
+> *Here the **flex: 1** is appplied to occupy the whole screen height and width*
 
 ## Text
 - Component for displaying text
@@ -44,4 +45,5 @@ export default function App() {
   </View>
 }
 ```
-#### *Any text always be wrapped with <Text> component otherwise it will throw the error*
+>[!NOTE]
+>*Any text always be wrapped with 'Text' component otherwise it will throw the error*
