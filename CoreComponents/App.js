@@ -1,12 +1,116 @@
-import {View, StatusBar} from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 
 export default function App() {
    return (
-      <View style={{flex: 1, backgroundColor: 'plum', padding: 60}}>
-         <StatusBar backgroundColor="lightgreen" barStyle="dark-content" />
+      <View style={styles.container}>
+         <View style={styles.darkMode}>
+            <Text style={styles.darkModeText}>Dark Mode Text<Text style={styles.boldText}> in Bold</Text></Text>
+         </View>
+         <View style={[styles.box, styles.lightblueBg, styles.boxShadow, styles.androidShadow]}>
+            <Text style={{borderRadius: 5, backgroundColor: 'red'}}>Lightblue box</Text>
+         </View>
+         <View style={[styles.box, styles.lightgreenBg, styles.boxShadow, styles.androidShadow]}>
+            <Text>Lightgreen box</Text>
+         </View>
       </View>
    )
 }
+
+const styles = StyleSheet.create({
+   container: {
+      flex: 1, backgroundColor: 'plum', padding: 60
+   },
+   darkMode: {
+      backgroundColor: "black"
+   },
+   darkModeText: {
+      color: "white"
+   },
+   boldText: {
+      fontWeight: 'bold'
+   }, 
+   box: {
+      width: 250,
+      height: 250,
+      // padding: 10,
+      paddingHorizontal: 10,
+      paddingVertical: 20,
+      // border: "2px solid purple" // This will not work in react native, We need to add each property individually, no need to add the borderStyle, its by default solid
+      borderWidth: 2,
+      borderColor: "purple",
+      borderRadius: 5,
+      marginTop: 20
+   },
+   lightblueBg: {
+      backgroundColor: 'lightblue',
+   },
+   lightgreenBg: {
+      backgroundColor: 'lightgreen',
+   },
+   boxShadow: {
+      shadowColor: "#333333",
+      shadowOffset: {
+         width: 6,
+         height: 6
+      },
+      shadowOpacity: 0.6,
+      shadowRadius: 4
+   },
+   androidShadow: {
+      elevation: 10
+   }
+})
+
+// import { View, Button, Alert } from 'react-native';
+
+// import {View} from 'react-native';
+// import Greet from './Greet';
+
+// export default function App() {
+//    return (
+//       <View style={{flex: 1, backgroundColor: 'plum', padding: 60}}>
+//          <Greet name="Ajay Kumar" />
+//          <Greet name="Vijay Kumar" />
+//       </View>
+//    )
+// }
+// import { View, Button, Alert } from 'react-native';
+
+// export default function App() {
+//    return (
+//       <View style={{ flex: 1, backgroundColor: 'plum', padding: 60 }}>
+//          <Button title="Alert 1" onPress={() => Alert.alert("Invalid data!")} />
+//          <Button title="Alert 2" onPress={() => Alert.alert("Invalid data!", 'DOB Incorrect')} />
+//          <Button title="Alert 2" onPress={() => Alert.alert("Invalid data!", 'DOB Incorrect', [
+//             { text: 'Ok', onPress: () => "Ok Pressed" },
+//             { text: 'Cancel', onPress: () => "Cancel Pressed" },
+//          ])} />
+//       </View>
+//    )
+// }
+
+// import { View, ActivityIndicator } from 'react-native';
+
+// export default function App() {
+//    const isVisible = false;
+//    return (
+//       <View style={{ flex: 1, backgroundColor: 'plum', padding: 60 }}>
+//          <ActivityIndicator />
+//          <ActivityIndicator size="large" />
+//          <ActivityIndicator size="large" color="midnightblue" />
+//           <ActivityIndicator size="large" color="midnightblue" animating={isVisible} />
+//       </View>
+//    )
+// }
+// import {View, StatusBar} from 'react-native';
+
+// export default function App() {
+//    return (
+//       <View style={{flex: 1, backgroundColor: 'plum', padding: 60}}>
+//          <StatusBar backgroundColor="lightgreen" barStyle="dark-content" />
+//       </View>
+//    )
+// }
 
 // import { useState } from 'react';
 // import { View, Text, Button, Modal } from 'react-native';

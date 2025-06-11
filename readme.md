@@ -218,3 +218,338 @@ export default function App() {
    )
 }
 ```
+
+## ActivityIndicator
+- The ActivityIndicator component displays a circular loading indicator
+- It is used to inform users about the status of ongoing processes, such as loading an app, submitting a form, or saving updates.
+
+```
+<!-- App.js -->
+
+import { View, ActivityIndicator } from 'react-native';
+
+export default function App() {
+   const isVisible = false;
+   return (
+      <View style={{ flex: 1, backgroundColor: 'plum', padding: 60 }}>
+         <ActivityIndicator />
+         <ActivityIndicator size="large" />
+         <ActivityIndicator size="large" color="midnightblue" />
+          <ActivityIndicator size="large" color="midnightblue" animating={isVisible} />
+      </View>
+   )
+}
+```
+
+## Alert
+- Alert launches an alert dialog with specified title and message
+- Optionally, you can also specify a list of buttons
+
+```
+<!-- App.js -->
+
+import { View, Button, Alert } from 'react-native';
+
+export default function App() {
+   return (
+      <View style={{ flex: 1, backgroundColor: 'plum', padding: 60 }}>
+         <Button title="Alert 1" onPress={() => Alert.alert("Invalid data!")} />
+         <Button title="Alert 2" onPress={() => Alert.alert("Invalid data!", 'DOB Incorrect')} />
+         <Button title="Alert 2" onPress={() => Alert.alert("Invalid data!", 'DOB Incorrect', [
+            { text: 'Ok', onPress: () => "Ok Pressed" },
+            { text: 'Cancel', onPress: () => "Cancel Pressed" },
+         ])} />
+      </View>
+   )
+}
+```
+
+## Custom Component
+- You can create any component and use them like react component
+
+```
+<!-- App.js -->
+
+import {View} from 'react-native';
+import Greet from './Greet';
+
+export default function App() {
+   return (
+      <View style={{flex: 1, backgroundColor: 'plum', padding: 60}}>
+         <Greet name="Ajay Kumar" />
+         <Greet name="Vijay Kumar" />
+      </View>
+   )
+}
+```
+
+```
+<!-- Greet.js -->
+
+import {View, Text} from 'react-native';
+
+export default function Greet({name}) {
+    return (
+        <View>
+            <Text>Hello, {name}</Text>
+        </View>
+    )
+}
+```
+
+## Styling React Native Apps
+- React Native does not use CSS for styling
+- You style your app using JavaScript
+- Name are written in camel case. Ex. backgroundColor instead of background-color
+
+## Style Approaches
+- Inline styles: using the style attribute 
+- StyleSheet API: provided by react native api
+- We have already see the style attribute so now we will focus on StyleSheet API
+
+```
+<!-- App.js -->
+
+import { View, Text, StyleSheet } from 'react-native';
+
+export default function App() {
+   return (
+      <View style={styles.container}>
+         <Text style={styles.title}>StyleSheet API</Text>
+      </View>
+   )
+}
+
+const styles = StyleSheet.create({
+   container: {
+      flex: 1, backgroundColor: 'plum', padding: 60
+   },
+   title: {
+      color: 'midnightblue'
+   }
+})
+
+```
+
+Multiple Styles 
+```
+<!-- App.js -->
+
+import { View, Text, StyleSheet } from 'react-native';
+
+export default function App() {
+   return (
+      <View style={styles.container}>
+         <View style={[styles.box, styles.lightblueBg]}>
+            <Text>Lightblue box</Text>
+         </View>
+         <View style={[styles.box, styles.lightgreenBg]}>
+            <Text>Lightgreen box</Text>
+         </View>
+      </View>
+   )
+}
+
+const styles = StyleSheet.create({
+   container: {
+      flex: 1, backgroundColor: 'plum', padding: 60
+   },
+   box: {
+      width: 100,
+      height: 100,
+      padding: 10,
+   },
+   lightblueBg: {
+      backgroundColor: 'lightblue',
+   },
+   lightgreenBg: {
+      backgroundColor: 'lightgreen',
+   }
+})
+```
+
+## Box Model
+- We can add the paddingHorizontal and paddingVertical, similarly, marginHorizontal and marginVertical.
+- border: "2px solid purple", this border style will not work in react native, we need to specify each property individual ex: borderWidth: 2, borderColor: 'purple'
+- When you add the borderRadius on Text component it will apply only for android device not for the iOS
+- If you really want to add the borderRadius on Text component then Wrap the Text component inside the View Component and apply borderRadius on View component
+
+```
+<!-- App.js -->
+
+import { View, Text, StyleSheet } from 'react-native';
+
+export default function App() {
+   return (
+      <View style={styles.container}>
+         <View style={[styles.box, styles.lightblueBg]}>
+            <Text style={{borderRadius: 5, backgroundColor: 'red'}}>Lightblue box</Text>
+         </View>
+         <View style={[styles.box, styles.lightgreenBg]}>
+            <Text>Lightgreen box</Text>
+         </View>
+      </View>
+   )
+}
+
+const styles = StyleSheet.create({
+   container: {
+      flex: 1, backgroundColor: 'plum', padding: 60
+   },
+   box: {
+      width: 100,
+      height: 100,
+      // padding: 10,
+      paddingHorizontal: 10,
+      paddingVertical: 20,
+      // border: "2px solid purple" // This will not work in react native, We need to add each property individually, no need to add the borderStyle, its by default solid
+      borderWidth: 2,
+      borderColor: "purple",
+      borderRadius: 5,
+   },
+   lightblueBg: {
+      backgroundColor: 'lightblue',
+   },
+   lightgreenBg: {
+      backgroundColor: 'lightgreen',
+   }
+})
+```
+
+## Box Shadow
+- *box-shadow: h-offset v-offset blur spread color*
+- box-shadow will not apply on android device, only shadowColor will be apply on both android and iOS,
+- To add the box shadow on android we need to use the elevation property, you can see the example below
+- To apply the cross platform box shadow we need to use the third party packages
+
+```
+<!-- App.js -->
+
+import { View, Text, StyleSheet } from 'react-native';
+
+export default function App() {
+   return (
+      <View style={styles.container}>
+         <View style={[styles.box, styles.lightblueBg, styles.boxShadow, styles.androidShadow]}>
+            <Text style={{borderRadius: 5, backgroundColor: 'red'}}>Lightblue box</Text>
+         </View>
+         <View style={[styles.box, styles.lightgreenBg, styles.boxShadow, styles.androidShadow]}>
+            <Text>Lightgreen box</Text>
+         </View>
+      </View>
+   )
+}
+
+const styles = StyleSheet.create({
+   container: {
+      flex: 1, backgroundColor: 'plum', padding: 60
+   },
+   box: {
+      width: 250,
+      height: 250,
+      // padding: 10,
+      paddingHorizontal: 10,
+      paddingVertical: 20,
+      // border: "2px solid purple" // This will not work in react native, We need to add each property individually, no need to add the borderStyle, its by default solid
+      borderWidth: 2,
+      borderColor: "purple",
+      borderRadius: 5,
+      marginTop: 20
+   },
+   lightblueBg: {
+      backgroundColor: 'lightblue',
+   },
+   lightgreenBg: {
+      backgroundColor: 'lightgreen',
+   },
+   boxShadow: {
+      shadowColor: "#333333",
+      shadowOffset: {
+         width: 6,
+         height: 6
+      },
+      shadowOpacity: 0.6,
+      shadowRadius: 4
+   },
+   androidShadow: {
+      elevation: 10
+   }
+})
+```
+
+## Style Inheritance
+
+- CSS Inheritance
+```
+<div style="color:red">
+   <p>Red colored text</p>
+</div>
+```
+Output: Red colored text
+
+- But in react native it will not be inherited to text
+- If we need to apply the style on text then we need to add the style on Text component
+- See the example below for better understanding
+>[!NOTE]
+>If you have the nested Text Component then it will apply the same style on children Text component
+
+```
+<!-- App.js -->
+
+import { View, Text, StyleSheet } from 'react-native';
+
+export default function App() {
+   return (
+      <View style={styles.container}>
+         <View style={styles.darkMode}>
+            <Text style={styles.darkModeText}>Dark Mode Text<Text style={styles.boldText}> in Bold</Text></Text>
+         </View>
+      </View>
+   )
+}
+
+const styles = StyleSheet.create({
+   container: {
+      flex: 1, backgroundColor: 'plum', padding: 60
+   },
+   darkMode: {
+      backgroundColor: "black"
+   },
+   darkModeText: {
+      color: "white"
+   },
+   boldText: {
+      fontWeight: 'bold'
+   }
+})
+```
+Output will be: Dark Mode Text **in Bold**
+>[!NOTE]
+> For the above output, background color will be black and color of the text will be white as it will apply the same style on nested Text component
+
+## Layout with Flexbox
+- At the core of layout design in React Native is Flexbox
+- Flexbox is a powerful one-dimensional layout model used to arrange elements within a container
+- With Flexbox, we have the freedom to arrange items either horizontally (from left to right or right to left) or vertically (from top to bottom or bottom to top)
+- You can easily control the spacing and alignment of items within the container
+
+**Flexbox consists of two main entities**
+- flex container
+- flex items
+
+```
+<View>
+   <View>Item 1</View>
+   <View>Item 2</View>
+   <View>Item 3</View>
+</View>
+```
+
+**Axes:**
+- Main axis : top to bottom
+- Cross axis : left to right
+
+**Learning Flexbox**
+- Much like learning CSS
+- Farmiliarize yourself with the varios Flexbox properties and understand how they function
+- Once you grasp the concepts of Flexbox, you'll have a solid understanding of how layouts are created in React Native
