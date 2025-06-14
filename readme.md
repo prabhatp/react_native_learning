@@ -1160,3 +1160,231 @@ const styles = StyleSheet.create({
     },
 })
 ```
+
+## Lists
+- The below example is done by using the map method which is not the recommended way
+- The reason because when we use the map method then it will render the all list items although we need to show only the 6-10 item on page (view), when we scroll then only it should be render. 
+- Solution is FlatList
+```
+<!-- App.js -->
+
+import { StyleSheet, ScrollView, View, SafeAreaView, Text, StatusBar } from 'react-native';
+import pokemonList from './data.json';
+
+export default function App() {
+  return (
+    <SafeAreaView style={styles.container}>
+      <ScrollView style={styles.scrollView}>
+        {pokemonList.map((pokemon) => {
+          return (
+            <View key={pokemon.id} style={styles.card}>
+              <Text style={styles.cardText}>{pokemon.type}</Text>
+              <Text style={styles.cardText}>{pokemon.name}</Text>
+            </View>
+          )
+        })}
+      </ScrollView>
+    </SafeAreaView>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#f5f5f5',
+    paddingTop: StatusBar.currentHeight + 20
+  },
+  scrollView: {
+    paddingHorizontal: 20
+  },
+  card: {
+    backgroundColor: "white",
+    padding: 16,
+    borderRadius: 8,
+    borderWidth: 1,
+    marginBottom: 16
+  },
+  cardText: {
+    fontSize: 30
+  }
+});
+
+```
+
+```
+<!-- data.json -->
+
+[
+ { "id": "1", "type": "Grass", "name": "Bulbasaur" },
+  { "id": "2", "type": "Grass", "name": "Ivysaur" },
+  { "id": "3", "type": "Grass", "name": "Venusaur" },
+  { "id": "4", "type": "Fire", "name": "Charmander" },
+  { "id": "5", "type": "Fire", "name": "Charmeleon" },
+  { "id": "6", "type": "Fire", "name": "Charizard" },
+  { "id": "7", "type": "Water", "name": "Squirtle" },
+  { "id": "8", "type": "Water", "name": "Wartortle" },
+  { "id": "9", "type": "Water", "name": "Blastoise" }
+]
+```
+
+## FlatList
+- FlatList component renders only the items currently in view, making it highly performant for long lists
+
+```
+<!-- App.js -->
+
+import { StyleSheet, View, SafeAreaView, Text, StatusBar, FlatList } from 'react-native';
+import pokemonList from './data.json';
+
+export default function App() {
+  return (
+    <SafeAreaView style={styles.container}>
+      <View style={styles.flastListWrapper}>
+        <FlatList
+          data={pokemonList}
+          renderItem={({ item }) => {
+            console.log('pokemon', item.id);
+            return (
+              <View key={item.id} style={styles.card}>
+                <Text style={styles.cardText}>{item.type}</Text>
+                <Text style={styles.cardText}>{item.name}</Text>
+              </View>
+            )
+          }}
+          // horizontal
+          keyExtractor={(item, index) => item.id.toString()}
+          ItemSeparatorComponent={<View style={{height: 16}} />}
+          ListEmptyComponent={<Text>No items found</Text>}
+          ListHeaderComponent={<Text style={styles.headerText}>Pokemon List</Text>}
+          ListFooterComponent={<Text style={styles.footerText}>End of List</Text>}
+        />
+      </View>
+    </SafeAreaView>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#f5f5f5',
+    paddingTop: StatusBar.currentHeight + 20
+  },
+  flastListWrapper: {
+    paddingHorizontal: 20
+  },
+  card: {
+    backgroundColor: "white",
+    padding: 16,
+    borderRadius: 8,
+    borderWidth: 1,
+   // marginBottom: 16
+  },
+  cardText: {
+    fontSize: 30
+  },
+   headerText: {
+    fontSize: 24,
+    textAlign: 'center',
+    marginBottom: 16,
+    fontWeight: 'bold'
+  },
+  footerText: {
+    fontSize: 24,
+    textAlign: 'center'
+  }
+});
+
+```
+
+## SectionList
+- A performant component designed for rendering sectioned lists
+
+```
+<!-- App.js -->
+
+import { StyleSheet, View, SafeAreaView, Text, StatusBar, SectionList } from 'react-native';
+import groupedData from './grouped-data.json';
+
+export default function App() {
+  return (
+    <SafeAreaView style={styles.container}>
+      <View style={styles.flastListWrapper}>
+        <SectionList 
+          sections={groupedData} 
+          renderItem={({item}) => {
+            return (
+              <View style={styles.card}>
+                <Text style={styles.cardText}>{item}</Text>
+              </View>
+            )
+          }}
+          renderSectionHeader={({section}) => (
+            <Text style={styles.sectionHeaderText}>{section.type}</Text>
+          )}
+          ItemSeparatorComponent={() => <View style={{height: 16}} />}
+          SectionSeparatorComponent={() => <View style={{height: 16}} />}
+        />
+      </View>
+    </SafeAreaView>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#f5f5f5',
+    paddingTop: StatusBar.currentHeight + 20
+  },
+  scrollView: {
+    paddingHorizontal: 20
+  },
+  flastListWrapper: {
+    paddingHorizontal: 20
+  },
+  card: {
+    backgroundColor: "white",
+    padding: 16,
+    borderRadius: 8,
+    borderWidth: 1,
+  },
+  cardText: {
+    fontSize: 30
+  },
+  headerText: {
+    fontSize: 24,
+    textAlign: 'center',
+    marginBottom: 16,
+    fontWeight: 'bold'
+  },
+  footerText: {
+    fontSize: 24,
+    textAlign: 'center'
+  },
+  sectionHeaderText: {
+    backgroundColor: "white",
+    fontSize: 23,
+    fontWeight: 'bold'
+  }
+});
+
+```
+
+```
+<!-- grouped-data.json -->
+
+[
+  {
+    "type": "Grass",
+    "data": ["Bulbasaur", "Ivysaur", "Venusaur"]
+  },
+  {
+    "type": "Fire",
+    "data": ["Charmander", "Charmeleon", "Charizard"]
+  },
+  {
+    "type": "Water",
+    "data": ["Squirtle", "Wartortle", "Blastoise"]
+  },
+  { "type": "Electric", "data": ["Pikachu", "Raichu"] }
+]
+```
