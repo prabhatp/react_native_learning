@@ -1,65 +1,88 @@
-import { View, Text, StyleSheet } from 'react-native';
-
+import {View, StyleSheet} from 'react-native';
+import Box from './components/Box';
 export default function App() {
-   return (
-      <View style={styles.container}>
-         <View style={styles.darkMode}>
-            <Text style={styles.darkModeText}>Dark Mode Text<Text style={styles.boldText}> in Bold</Text></Text>
-         </View>
-         <View style={[styles.box, styles.lightblueBg, styles.boxShadow, styles.androidShadow]}>
-            <Text style={{borderRadius: 5, backgroundColor: 'red'}}>Lightblue box</Text>
-         </View>
-         <View style={[styles.box, styles.lightgreenBg, styles.boxShadow, styles.androidShadow]}>
-            <Text>Lightgreen box</Text>
-         </View>
+   return <View style={styles.container}>
+         <Box style={{backgroundColor: '#8e9b00', left: 75, top: 75}}>Box 1</Box>
+         <Box style={{backgroundColor: '#b65d1f'}}>Box 2</Box>
+         <Box style={{backgroundColor: '#1c4c56'}}>Box 3</Box>
+         <Box style={{backgroundColor: '#ab9156', position: 'absolute', left: 100, top: 100}}>Box 4</Box>
+         <Box style={{backgroundColor: '#6b0803'}}>Box 5</Box>
+         <Box style={{backgroundColor: '#1c4c56'}}>Box 6</Box>
+         <Box style={{backgroundColor: '#b95f21'}}>Box 7</Box>
       </View>
-   )
 }
 
 const styles = StyleSheet.create({
    container: {
-      flex: 1, backgroundColor: 'plum', padding: 60
-   },
-   darkMode: {
-      backgroundColor: "black"
-   },
-   darkModeText: {
-      color: "white"
-   },
-   boldText: {
-      fontWeight: 'bold'
-   }, 
-   box: {
-      width: 250,
-      height: 250,
-      // padding: 10,
-      paddingHorizontal: 10,
-      paddingVertical: 20,
-      // border: "2px solid purple" // This will not work in react native, We need to add each property individually, no need to add the borderStyle, its by default solid
-      borderWidth: 2,
-      borderColor: "purple",
-      borderRadius: 5,
-      marginTop: 20
-   },
-   lightblueBg: {
-      backgroundColor: 'lightblue',
-   },
-   lightgreenBg: {
-      backgroundColor: 'lightgreen',
-   },
-   boxShadow: {
-      shadowColor: "#333333",
-      shadowOffset: {
-         width: 6,
-         height: 6
-      },
-      shadowOpacity: 0.6,
-      shadowRadius: 4
-   },
-   androidShadow: {
-      elevation: 10
+      flex: 1,
+      marginTop: 64,
+      borderWidth: 6,
+      borderColor: "red"
    }
 })
+
+// import { View, Text, StyleSheet } from 'react-native';
+
+// export default function App() {
+//    return (
+//       <View style={styles.container}>
+//          <View style={styles.darkMode}>
+//             <Text style={styles.darkModeText}>Dark Mode Text<Text style={styles.boldText}> in Bold</Text></Text>
+//          </View>
+//          <View style={[styles.box, styles.lightblueBg, styles.boxShadow, styles.androidShadow]}>
+//             <Text style={{borderRadius: 5, backgroundColor: 'red'}}>Lightblue box</Text>
+//          </View>
+//          <View style={[styles.box, styles.lightgreenBg, styles.boxShadow, styles.androidShadow]}>
+//             <Text>Lightgreen box</Text>
+//          </View>
+//       </View>
+//    )
+// }
+
+// const styles = StyleSheet.create({
+//    container: {
+//       flex: 1, backgroundColor: 'plum', padding: 60
+//    },
+//    darkMode: {
+//       backgroundColor: "black"
+//    },
+//    darkModeText: {
+//       color: "white"
+//    },
+//    boldText: {
+//       fontWeight: 'bold'
+//    }, 
+//    box: {
+//       width: 250,
+//       height: 250,
+//       // padding: 10,
+//       paddingHorizontal: 10,
+//       paddingVertical: 20,
+//       // border: "2px solid purple" // This will not work in react native, We need to add each property individually, no need to add the borderStyle, its by default solid
+//       borderWidth: 2,
+//       borderColor: "purple",
+//       borderRadius: 5,
+//       marginTop: 20
+//    },
+//    lightblueBg: {
+//       backgroundColor: 'lightblue',
+//    },
+//    lightgreenBg: {
+//       backgroundColor: 'lightgreen',
+//    },
+//    boxShadow: {
+//       shadowColor: "#333333",
+//       shadowOffset: {
+//          width: 6,
+//          height: 6
+//       },
+//       shadowOpacity: 0.6,
+//       shadowRadius: 4
+//    },
+//    androidShadow: {
+//       elevation: 10
+//    }
+// })
 
 // import { View, Button, Alert } from 'react-native';
 

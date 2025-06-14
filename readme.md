@@ -553,3 +553,417 @@ Output will be: Dark Mode Text **in Bold**
 - Much like learning CSS
 - Farmiliarize yourself with the varios Flexbox properties and understand how they function
 - Once you grasp the concepts of Flexbox, you'll have a solid understanding of how layouts are created in React Native
+
+## flex
+- The flex property plays a crucial role in defining how much of a view will fill the screen along the main axis
+- It accepts an integer value greater than or eqaul to 0, indicating the fraction of the available space the component should occupy
+- In React native View component is by default set with display: flex
+
+```
+<!-- App.js -->
+
+import {View, StyleSheet} from 'react-native';
+import Box from './components/Box';
+export default function App() {
+   return <View style={styles.container}>
+         <Box style={{backgroundColor: '#8e9b00', flex: 1}}>Box 1</Box>
+         <Box style={{backgroundColor: '#b65d1f', flex: 1}}>Box 2</Box>
+         <Box style={{backgroundColor: '#1c4c56', flex: 1}}>Box 3</Box>
+         <Box style={{backgroundColor: '#ab9156'}}>Box 4</Box>
+         <Box style={{backgroundColor: '#6b0803'}}>Box 5</Box>
+         <Box style={{backgroundColor: '#1c4c56'}}>Box 6</Box>
+         <Box style={{backgroundColor: '#b95f21'}}>Box 7</Box>
+      </View>
+}
+
+const styles = StyleSheet.create({
+   container: {
+      flex: 1,
+      marginTop: 64,
+      borderWidth: 6,
+      borderColor: "red"
+   }
+})
+```
+
+```
+<!-- components/Box.js -->
+
+import {View, Text, StyleSheet} from 'react-native';
+
+export default function Box({children, style}) {
+    return(
+        <View style={[styles.box, style]}>
+            <Text style={styles.text}>{children}</Text>
+        </View>
+    )
+}
+
+const styles = StyleSheet.create({
+    box: {
+        backgroundColor: '#fff',
+        padding: 20
+    },
+    text: {
+        fontSize: 24,
+        fontWeight: "bold",
+        textAlign: 'center',
+        color: 'white'
+    }
+})
+```
+
+##### Add the notes from video 29 to 37 here
+
+## Relative and Absolute Layout
+The layouts area based on the *position* property, which defines how an element is positioned within its parent container
+- relative
+- absolute
+
+<ins>**Relative layout**</ins>
+- In this layout, an element is positioned according to the normal flow of the layout
+- It remains in its original position and can be offset from that position using the top, right, bottom and left values
+- Importantly, this offset does not affect the positioning of any sibling or parent elements.
+
+<ins>**Absolute layout**</ins>
+- In this layout, an element does not participate in the normal flow of the layout
+- It is instead laid out independently of its siblings
+- The position of the element is determined by the top, right, bottom, and left values, which specify specific coordinates relative to its parent container.
+
+```
+import {View, StyleSheet} from 'react-native';
+import Box from './components/Box';
+export default function App() {
+   return <View style={styles.container}>
+         <Box style={{backgroundColor: '#8e9b00', left: 75, top: 75}}>Box 1</Box>
+         <Box style={{backgroundColor: '#b65d1f'}}>Box 2</Box>
+         <Box style={{backgroundColor: '#1c4c56'}}>Box 3</Box>
+         <Box style={{backgroundColor: '#ab9156', position: 'absolute', left: 100, top: 100}}>Box 4</Box>
+         <Box style={{backgroundColor: '#6b0803'}}>Box 5</Box>
+         <Box style={{backgroundColor: '#1c4c56'}}>Box 6</Box>
+         <Box style={{backgroundColor: '#b95f21'}}>Box 7</Box>
+      </View>
+}
+
+const styles = StyleSheet.create({
+   container: {
+      flex: 1,
+      marginTop: 64,
+      borderWidth: 6,
+      borderColor: "red"
+   }
+})
+```
+
+## Dynamic User Interfaces
+- Currently, all our learning has centered around iPhone 14 and Pixel 4 devices
+- Our app's users won't all be using identical devices
+- Device sizes may vary, ranging from more compact phones to larger devices like iPads or Android tablets
+- We must ensure that our app's user interface remains responsive to these different device sizes while maintaining an optimal user experience
+- On the same device, a user might opt for portrait mode, while another preferes landscape orientation
+
+- The below code will work fine on android or iOS mobile device but looks not much better on iPad devices
+- So solution is Dimensions api
+
+```
+import { StyleSheet, Text, View } from 'react-native';
+
+export default function App() {
+  return (
+    <View style={styles.container}>
+      <View style={styles.box}>
+        <Text style={styles.text}>Welcome!</Text>
+      </View>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: 'plum',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  box: {
+    width: 300,
+    height: 300,
+    backgroundColor: "lightblue",
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  text: {
+    fontSize: 24
+  }
+});
+```
+
+## Dimensions API
+
+```
+<!-- App.js -->
+
+import { StyleSheet, Text, View, Dimensions } from 'react-native';
+
+export default function App() {
+  return (
+    <View style={styles.container}>
+      <View style={styles.box}>
+        <Text style={styles.text}>Welcome!</Text>
+      </View>
+    </View>
+  );
+}
+
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: 'plum',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  box: {
+    width: windowWidth > 500 ? "70%" : "90%",
+    height: windowHeight > 600 ? "60%" : "90%",
+    backgroundColor: "lightblue",
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  text: {
+    fontSize: windowWidth > 500 ? 50 : 24
+  }
+});
+
+```
+
+## Dimensions API drawback
+- It will create issue with landscape and portrait mode, when you change the mobile device from portrait to landscape then you need to restart the application to get the correct dimensions
+- One posible solution is to handle on change the dimension
+
+```
+import {useState, useEffect} from 'react';
+
+import { StyleSheet, Text, View, Dimensions } from 'react-native';
+
+export default function App() {
+  const [dimensions, setDimensions] = useState({window: Dimensions.get('window')});
+
+  useEffect(() => {
+    const subscription = Dimensions.addEventListener('change', (window) => {
+      setDimensions({window});
+    })
+    return () => subscription?.remove();
+  })
+  const {window} = dimensions;
+  const windowWidth = window.width;
+  const windowHeight = window.height;
+
+  return (
+    <View style={styles.container}>
+      <View style={[styles.box, {
+        width: windowWidth > 500 ? "70%" : "90%",
+        height: windowHeight > 600 ? "60%" : "90%",
+      }]}>
+        <Text style={{fontSize: windowWidth > 500 ? 50 : 24}}>Welcome!</Text>
+      </View>
+    </View>
+  );
+}
+
+// const windowWidth = Dimensions.get('window').width;
+// const windowHeight = Dimensions.get('window').height;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: 'plum',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  box: {
+    // width: windowWidth > 500 ? "70%" : "90%",
+    // height: windowHeight > 600 ? "60%" : "90%",
+    backgroundColor: "lightblue",
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  // text: {
+  //   fontSize: windowWidth > 500 ? 50 : 24
+  // }
+});
+
+```
+
+## useDimensions hook
+
+```
+<!-- App.js -->
+
+import { StyleSheet, Text, View, useWindowDimensions } from 'react-native';
+
+export default function App() {
+  const windowWidth = useWindowDimensions().width;
+  const windowHeight = useWindowDimensions().height;
+
+  return (
+    <View style={styles.container}>
+      <View style={[styles.box, {
+        width: windowWidth > 500 ? "70%" : "90%",
+        height: windowHeight > 600 ? "60%" : "90%",
+      }]}>
+        <Text style={{fontSize: windowWidth > 500 ? 50 : 24}}>Welcome!</Text>
+      </View>
+    </View>
+  );
+}
+
+```
+
+## SafeAreaView
+
+```
+<!-- App.js -->
+
+import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
+
+export default function App() {
+  return (
+    <SafeAreaView style={styles.safeContainer}>
+      <View style={styles.container}>
+        <View style={styles.box}>
+          <Text style={styles.text}>Welcome!</Text>
+        </View>
+      </View>
+    </SafeAreaView>
+
+  );
+}
+
+const styles = StyleSheet.create({
+  safeContainer: {
+    flex: 1,
+    backgroundColor: 'plum'
+  },  
+  container: {
+    flex: 1,
+    backgroundColor: 'plum',
+  },
+  box: {
+    padding: 20
+  },
+  text: {
+    fontWeight: 'bold',
+    fontSize: 24,
+    textAlign: 'center'
+  }
+});
+```
+
+## Platform Specific Code
+- When developing a corss-platform app, maximizing code reuse is a priority
+- There are situations where it becomes necessary to tailor your code to specific platforms
+- React Native offers two approaches for organizing and separating platform-specific code
+   - Platform module
+   - Platform-specific file extensions
+
+```
+<!-- App.js -->
+
+import { Platform, SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import CustomButton from './components/CustomButton/CustomButton';
+
+export default function App() {
+  return (
+    <SafeAreaView style={styles.safeContainer}>
+      <View style={styles.container}>
+        <View style={styles.box}>
+          <Text style={styles.text}>Welcome!</Text>
+          <CustomButton title="Press Me" onPress={() => alert("Pressed")} />
+        </View>
+      </View>
+    </SafeAreaView>
+
+  );
+}
+
+const styles = StyleSheet.create({
+  safeContainer: {
+    flex: 1,
+    backgroundColor: 'plum'
+  },  
+  container: {
+    flex: 1,
+    backgroundColor: 'plum',
+    paddingTop: Platform.OS === 'android' ? 25 : 0
+  },
+  box: {
+    padding: 20
+  },
+  text: {
+    ...Platform.select({
+      ios: {
+        color: 'purple',
+        fontSize: 24,
+        fontStyle: 'italic'
+      },
+      android: {
+        color: "blue",
+        fontSize: 30
+      }
+    }),
+    fontWeight: 'bold',
+    textAlign: 'center'
+  }
+});
+```
+
+```
+<!-- components/CustomButton/CustomButton.android.js -->
+
+import React from 'react';
+import { Pressable, Text } from 'react-native';
+
+const CustomButton = ({onPress, title}) => (
+    <Pressable
+        onPress={onPress}
+        style={{
+            justifyContent: 'center',
+            alignItems: 'center',
+            backgroundColor: 'lightblue',
+            borderRadius: 5,
+            padding: 10
+        }}
+    >
+        <Text style={{color: 'blue', fontSize: 18}}>{title}</Text>
+    </Pressable>
+)
+
+export default CustomButton;
+```
+
+```
+<!-- components/CustomButton/CustomButton.ios.js -->
+
+import React from 'react';
+import { Pressable, Text } from 'react-native';
+
+const CustomButton = ({onPress, title}) => (
+    <Pressable
+        onPress={onPress}
+        style={{
+            justifyContent: 'center',
+            alignItems: 'center',
+            backgroundColor: 'lightblue',
+            borderRadius: 20,
+            padding: 10
+        }}
+    >
+        <Text style={{color: 'purple', fontSize: 18}}>{title}</Text>
+    </Pressable>
+)
+
+export default CustomButton;
+```
