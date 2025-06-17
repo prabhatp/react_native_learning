@@ -18,7 +18,7 @@ export default function App() {
 }
 ```
 
-> [!NOTE] 
+> [!NOTE]
 > _Here the **flex: 1** is appplied to occupy the whole screen height and width_
 
 ## Text
@@ -49,7 +49,7 @@ export default function App() {
 }
 ```
 
-> [!NOTE] 
+> [!NOTE]
 > Any text must be wrapped with 'Text' component otherwise it will throw the error
 
 ## Image
@@ -88,10 +88,12 @@ export default function App() {
   </View>
 }
 ```
->[!NOTE]
+
+> [!NOTE]
 > If you are using the network image then always use the {uri: "network_image_url"}
 
 ## ScrollView
+
 - ScrollView component wraps the platform-specific scrolling functionality
 - ScrollView require a bounded height to function properly
 
@@ -114,6 +116,7 @@ export default function App() {
 ```
 
 ## Button
+
 - The button component allows users to trigger actions
 - The button component has platform-specific rendering for iOS and Android
 
@@ -128,10 +131,12 @@ export default function App() {
    </View>
 }
 ```
->[!NOTE]
+
+> [!NOTE]
 > In react native we can write the text as child of Button component, we need to pass the title props and specify the text
 
 ## Pressable
+
 - Pressable is a wrapper component that detects various stages of press interactions on its defined children
 - You can create a custom button using Pressable
 - In Addition to onPress , Pressable Component supports several others events
@@ -164,11 +169,12 @@ export default function App() {
 ```
 
 ## Modal
+
 - Modal is a screen that overlays the app content to provide information or prompt the user for a decision
 - Since they are purposefully interruptive make sure you see them only when necessary
 - You can pass the two value for animationType a. slide, b. fade, by default its value is none
 - You can pass the two value for presentationStyle a. pageSheet, b. formSheet, by default its value is fullScreen
-- formSheet is narrow while pageSheet is wider 
+- formSheet is narrow while pageSheet is wider
 - presentationStyle will affect iOS device not the andriod device
 
 ```
@@ -199,6 +205,7 @@ export default function App() {
 ```
 
 ## StatusBar
+
 - The StatusBar component allows you to control the application's status bar
 - The status bar is the zone, typically at the top of the screen, that displays the current time, Wi-Fi and network information, battery level other status icons
 - backgroundColor prop to change the background color of the status bar
@@ -220,6 +227,7 @@ export default function App() {
 ```
 
 ## ActivityIndicator
+
 - The ActivityIndicator component displays a circular loading indicator
 - It is used to inform users about the status of ongoing processes, such as loading an app, submitting a form, or saving updates.
 
@@ -242,6 +250,7 @@ export default function App() {
 ```
 
 ## Alert
+
 - Alert launches an alert dialog with specified title and message
 - Optionally, you can also specify a list of buttons
 
@@ -265,6 +274,7 @@ export default function App() {
 ```
 
 ## Custom Component
+
 - You can create any component and use them like react component
 
 ```
@@ -298,12 +308,14 @@ export default function Greet({name}) {
 ```
 
 ## Styling React Native Apps
+
 - React Native does not use CSS for styling
 - You style your app using JavaScript
 - Name are written in camel case. Ex. backgroundColor instead of background-color
 
 ## Style Approaches
-- Inline styles: using the style attribute 
+
+- Inline styles: using the style attribute
 - StyleSheet API: provided by react native api
 - We have already see the style attribute so now we will focus on StyleSheet API
 
@@ -331,7 +343,8 @@ const styles = StyleSheet.create({
 
 ```
 
-Multiple Styles 
+Multiple Styles
+
 ```
 <!-- App.js -->
 
@@ -369,6 +382,7 @@ const styles = StyleSheet.create({
 ```
 
 ## Box Model
+
 - We can add the paddingHorizontal and paddingVertical, similarly, marginHorizontal and marginVertical.
 - border: "2px solid purple", this border style will not work in react native, we need to specify each property individual ex: borderWidth: 2, borderColor: 'purple'
 - When you add the borderRadius on Text component it will apply only for android device not for the iOS
@@ -417,7 +431,8 @@ const styles = StyleSheet.create({
 ```
 
 ## Box Shadow
-- *box-shadow: h-offset v-offset blur spread color*
+
+- _box-shadow: h-offset v-offset blur spread color_
 - box-shadow will not apply on android device, only shadowColor will be apply on both android and iOS,
 - To add the box shadow on android we need to use the elevation property, you can see the example below
 - To apply the cross platform box shadow we need to use the third party packages
@@ -480,18 +495,20 @@ const styles = StyleSheet.create({
 ## Style Inheritance
 
 - CSS Inheritance
+
 ```
 <div style="color:red">
    <p>Red colored text</p>
 </div>
 ```
+
 Output: Red colored text
 
 - But in react native it will not be inherited to text
 - If we need to apply the style on text then we need to add the style on Text component
 - See the example below for better understanding
->[!NOTE]
->If you have the nested Text Component then it will apply the same style on children Text component
+  > [!NOTE]
+  > If you have the nested Text Component then it will apply the same style on children Text component
 
 ```
 <!-- App.js -->
@@ -523,17 +540,21 @@ const styles = StyleSheet.create({
    }
 })
 ```
+
 Output will be: Dark Mode Text **in Bold**
->[!NOTE]
+
+> [!NOTE]
 > For the above output, background color will be black and color of the text will be white as it will apply the same style on nested Text component
 
 ## Layout with Flexbox
+
 - At the core of layout design in React Native is Flexbox
 - Flexbox is a powerful one-dimensional layout model used to arrange elements within a container
 - With Flexbox, we have the freedom to arrange items either horizontally (from left to right or right to left) or vertically (from top to bottom or bottom to top)
 - You can easily control the spacing and alignment of items within the container
 
 **Flexbox consists of two main entities**
+
 - flex container
 - flex items
 
@@ -546,15 +567,18 @@ Output will be: Dark Mode Text **in Bold**
 ```
 
 **Axes:**
+
 - Main axis : top to bottom
 - Cross axis : left to right
 
 **Learning Flexbox**
+
 - Much like learning CSS
 - Farmiliarize yourself with the varios Flexbox properties and understand how they function
 - Once you grasp the concepts of Flexbox, you'll have a solid understanding of how layouts are created in React Native
 
 ## flex
+
 - The flex property plays a crucial role in defining how much of a view will fill the screen along the main axis
 - It accepts an integer value greater than or eqaul to 0, indicating the fraction of the available space the component should occupy
 - In React native View component is by default set with display: flex
@@ -616,16 +640,20 @@ const styles = StyleSheet.create({
 ##### Add the notes from video 29 to 37 here
 
 ## Relative and Absolute Layout
-The layouts area based on the *position* property, which defines how an element is positioned within its parent container
+
+The layouts area based on the _position_ property, which defines how an element is positioned within its parent container
+
 - relative
 - absolute
 
 <ins>**Relative layout**</ins>
+
 - In this layout, an element is positioned according to the normal flow of the layout
 - It remains in its original position and can be offset from that position using the top, right, bottom and left values
 - Importantly, this offset does not affect the positioning of any sibling or parent elements.
 
 <ins>**Absolute layout**</ins>
+
 - In this layout, an element does not participate in the normal flow of the layout
 - It is instead laid out independently of its siblings
 - The position of the element is determined by the top, right, bottom, and left values, which specify specific coordinates relative to its parent container.
@@ -656,6 +684,7 @@ const styles = StyleSheet.create({
 ```
 
 ## Dynamic User Interfaces
+
 - Currently, all our learning has centered around iPhone 14 and Pixel 4 devices
 - Our app's users won't all be using identical devices
 - Device sizes may vary, ranging from more compact phones to larger devices like iPads or Android tablets
@@ -740,6 +769,7 @@ const styles = StyleSheet.create({
 ```
 
 ## Dimensions API drawback
+
 - It will create issue with landscape and portrait mode, when you change the mobile device from portrait to landscape then you need to restart the application to get the correct dimensions
 - One posible solution is to handle on change the dimension
 
@@ -846,7 +876,7 @@ const styles = StyleSheet.create({
   safeContainer: {
     flex: 1,
     backgroundColor: 'plum'
-  },  
+  },
   container: {
     flex: 1,
     backgroundColor: 'plum',
@@ -863,11 +893,12 @@ const styles = StyleSheet.create({
 ```
 
 ## Platform Specific Code
+
 - When developing a corss-platform app, maximizing code reuse is a priority
 - There are situations where it becomes necessary to tailor your code to specific platforms
 - React Native offers two approaches for organizing and separating platform-specific code
-   - Platform module
-   - Platform-specific file extensions
+  - Platform module
+  - Platform-specific file extensions
 
 ```
 <!-- App.js -->
@@ -893,7 +924,7 @@ const styles = StyleSheet.create({
   safeContainer: {
     flex: 1,
     backgroundColor: 'plum'
-  },  
+  },
   container: {
     flex: 1,
     backgroundColor: 'plum',
@@ -1162,9 +1193,11 @@ const styles = StyleSheet.create({
 ```
 
 ## Lists
+
 - The below example is done by using the map method which is not the recommended way
-- The reason because when we use the map method then it will render the all list items although we need to show only the 6-10 item on page (view), when we scroll then only it should be render. 
+- The reason because when we use the map method then it will render the all list items although we need to show only the 6-10 item on page (view), when we scroll then only it should be render.
 - Solution is FlatList
+
 ```
 <!-- App.js -->
 
@@ -1228,6 +1261,7 @@ const styles = StyleSheet.create({
 ```
 
 ## FlatList
+
 - FlatList component renders only the items currently in view, making it highly performant for long lists
 
 ```
@@ -1297,6 +1331,7 @@ const styles = StyleSheet.create({
 ```
 
 ## SectionList
+
 - A performant component designed for rendering sectioned lists
 
 ```
@@ -1309,8 +1344,8 @@ export default function App() {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.flastListWrapper}>
-        <SectionList 
-          sections={groupedData} 
+        <SectionList
+          sections={groupedData}
           renderItem={({item}) => {
             return (
               <View style={styles.card}>
@@ -1387,4 +1422,224 @@ const styles = StyleSheet.create({
   },
   { "type": "Electric", "data": ["Pikachu", "Raichu"] }
 ]
+```
+
+## Inputs in RN vs. Web
+
+- In web development, we have lots of HTML elements at our disposal to capture user input
+- For example, input fields, text areas, dropdown menus, checkboxes, radio groups, and many more
+- The core RN library only provides TextInput and Switch
+- These will be sole focus of our learning in this section
+- "What about the other components?"
+- Expo expands our toolkit, offering additional components like checkboxes and date pickers through the Expo SDK.
+
+## Forms in RN
+
+- **Managing Form State**: Controlling the dynamic data within our forms
+- **Handling Form Validation**: Ensuring the integrity and validity of the user's input
+- **Displaying Validation Messages**: Communicating the results of validation to the user
+- **Submitting Form Data**: Sending the collected information where it needs to go
+
+## TextInput
+
+- TextInput component is a fundamental building block for user input in React Native
+- It allows users to enter text and other data into your app.
+- The below example show the input box and multiline input box (textarea in web)
+
+```
+<!-- App.js -->
+import { StyleSheet, StatusBar, SafeAreaView, TextInput, Text } from 'react-native';
+import { useState } from 'react';
+
+export default function App() {
+  const [name, setName] = useState("");
+
+  return (
+    <SafeAreaView style={styles.container}>
+      <TextInput
+        style={styles.input}
+        value={name}
+        onChangeText={setName}
+        placeholder='email@example.com'
+        autoCorrect={false}
+        autoCapitalize='none'
+        // secureTextEntry // For password
+        // keyboardType='numeric'
+      />
+      <TextInput style={[styles.input, styles.multilineText]} placeholder='message' multiline />
+      <Text>My Name is {name}</Text>
+    </SafeAreaView>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    paddingTop: StatusBar.currentHeight
+  },
+  input: {
+    height: 40,
+    margin: 12,
+    padding: 10,
+    borderWidth: 1
+  },
+  multilineText: {
+    minHeight: 100,
+    textAlignVertical: 'top'
+  }
+});
+
+```
+
+## Switch
+
+- The switch component serves as a valuable tool for integrating toggles into your app's user interface
+- It's particularly well-suited for scenarios where you require users to make binary choices, such as enabling or disabling specific app features.
+
+```
+<!-- App.js -->
+
+import { StyleSheet, StatusBar, SafeAreaView, View, Switch } from 'react-native';
+import { useState } from 'react';
+
+export default function App() {
+  const [isDarkMode, setDarkMode] = useState(false);
+
+  return (
+    <SafeAreaView style={styles.container}>
+      <View style={styles.switchContainer}>
+        <Text style={styles.text}>Dark Mode</Text>
+        <Switch
+          value={isDarkMode}
+          onValueChange={() => setDarkMode((prevState) => !prevState)}
+          trackColor={{ false: "#767577", true: "lightblue"}}
+          thumbColor="#f4f3f4"
+        />
+      </View>
+    </SafeAreaView>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    paddingTop: StatusBar.currentHeight
+  },
+  switchContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingHorizontal: 10
+  }
+});
+
+```
+
+## Login Form
+
+```
+<!-- App.js -->
+import { View, Text, TextInput, Button, StyleSheet, KeyboardAvoidingView, Image, Platform } from 'react-native';
+import { useState } from 'react';
+
+export default function App() {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [errors, setErrors] = useState({})
+
+  const validateForm = () => {
+    let errors = {};
+    if(!username) {
+      errors.username = "Username is required";
+    }
+    if(!password) {
+      errors.password = "Password is required";
+    }
+
+    setErrors(errors);
+    return Object.keys(errors).length === 0;
+  }
+
+  const handleSubmit = () => {
+    if(validateForm()) {
+      console.log('Submitted', username, password);
+      setUsername("");
+      setPassword("");
+      setErrors({});
+    }
+  }
+  return (
+    <KeyboardAvoidingView behavior='padding' keyboardVerticalOffset={Platform.OS === 'ios' ? 100 : 0} style={styles.container}>
+      <View style={styles.form}>
+        <Image source={require("./assets/adaptive-icon.png")} style={styles.image} />
+        <Text style={styles.label}>UserName</Text>
+        <TextInput
+          style={styles.input}
+          placeholder='Enter your name'
+          value={username}
+          onChangeText={setUsername}
+        />
+        {errors.username ? <Text style={styles.errorText}>{errors.username}</Text> : null}
+        <Text style={styles.label}>Password</Text>
+        <TextInput
+          style={styles.input}
+          placeholder='Enter your password'
+          secureTextEntry
+          value={password}
+          onChangeText={setPassword}
+        />
+         {errors.password ? <Text style={styles.errorText}>{errors.password}</Text> : null}
+        <Button title="Login" onPress={handleSubmit} />
+      </View>
+    </KeyboardAvoidingView>
+  )
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    paddingHorizontal: 20,
+    backgroundColor: "#f5f5f5"
+  },
+  form: {
+    backgroundColor: "white",
+    padding: 20,
+    borderRadius: 10,
+    shadowColor: "black",
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5
+  },
+  label: {
+    fontSize: 16,
+    marginBottom: 5,
+    fontWeight: "bold"
+  },
+  input: {
+    height: 40,
+    borderColor: "#ddd",
+    borderWidth: 1,
+    marginBottom: 15,
+    padding: 10,
+    borderRadius: 5
+  },
+  image : {
+    width: 400,
+    height: 400,
+    alignSelf: 'center',
+    marginBottom: 50
+  },
+  errorText: {
+    color: "red",
+    marginBottom: 10
+  }
+})
+
 ```
